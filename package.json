@@ -6,16 +6,25 @@
   },
   "name": "unleash-ff-mcp-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/src/index.js",
+  "bin": {
+    "unleash-ff-mcp-server": "dist/src/index.js"
+  },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/src/index.js",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ylin6/unleash-ff-mcp-server.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yucheng Lin",
   "license": "ISC",
-  "description": "",
+  "description": "Unleash MCP Server",
   "devDependencies": {
     "@types/node": "^22.13.9",
     "typescript": "^4.9.5"
