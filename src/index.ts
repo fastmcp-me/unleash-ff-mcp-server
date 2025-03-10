@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
@@ -18,15 +19,13 @@ import {
 // Create an MCP server
 const server = new McpServer({
   name: 'unleash-ff-mcp-server',
-  version: '1.0.0',
-  capabilities: {
-    tools: {},
-  },
+  version: '1.0.3',
 });
 
 // Register tools with raw Zod shapes and descriptions
 server.tool('getProjects', 'Retrieve a list of projects', async () => {
-  return await getProjects();
+  const data = await getProjects();
+  return { content: [{ type: 'text', text: JSON.stringify(data) }] };
 });
 
 server.tool(
@@ -34,7 +33,8 @@ server.tool(
   'Retrieve features for a specific project',
   RawGetFeaturesShape,
   async (args) => {
-    return await getFeatures(args);
+    const data = await getFeatures(args);
+    return { content: [{ type: 'text', text: JSON.stringify(data) }] };
   }
 );
 
@@ -43,7 +43,8 @@ server.tool(
   'Create a new feature flag',
   RawCreateFeatureFlagShape,
   async (args) => {
-    return await createFeatureFlag(args);
+    const data = await createFeatureFlag(args);
+    return { content: [{ type: 'text', text: JSON.stringify(data) }] };
   }
 );
 
@@ -52,7 +53,8 @@ server.tool(
   'Update an existing feature flag',
   RawUpdateFeatureFlagShape,
   async (args) => {
-    return await updateFeatureFlag(args);
+    const data = await updateFeatureFlag(args);
+    return { content: [{ type: 'text', text: JSON.stringify(data) }] };
   }
 );
 
@@ -61,7 +63,8 @@ server.tool(
   'Retrieve a specific feature flag from a project',
   RawGetFeatureFlagShape,
   async (args) => {
-    return await getFeatureFlag(args);
+    const data = await getFeatureFlag(args);
+    return { content: [{ type: 'text', text: JSON.stringify(data) }] };
   }
 );
 

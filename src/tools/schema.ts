@@ -8,14 +8,9 @@ const RawGetFeaturesShape = {
 const RawCreateFeatureFlagShape = {
   projectId: z.string(),
   featureData: z.object({
+    name: z.string(),
     description: z.string().nullable(),
     impressionData: z.boolean().nullable(),
-    tags: z.array(
-      z.object({
-        value: z.string().min(2).max(50),
-        type: z.string().min(2).max(50),
-      })
-    ),
     type: z.enum([
       'experiment',
       'kill-switch',
